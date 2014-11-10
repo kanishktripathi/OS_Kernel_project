@@ -1,0 +1,4 @@
+#!/bin/sh
+
+#./bin/qemu-system-i386 -m 64M -L ./qemu/share/qemu/ -nographic -kernel $HOME/linux-2.6.32.63/arch/x86/boot/bzImage -append “console=ttyS0,115200n8 console=tty0” -hda ../../QDGL/hda.img  
+./bin/qemu-system-i386 -m 64M -L ./qemu/share/qemu/ -nographic -hda ../../QDGL/hda.img  

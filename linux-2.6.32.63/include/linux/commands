@@ -1,0 +1,26 @@
+./bin/qemu-system-x86_64 -m 64M -L ./qemu/share/qemu/ -curses -hda ../openwrt-x86-generic-combined-ext2.img
+
+
+./bin/qemu-system-x86_64 -m 64M -L ./qemu/share/qemu/ -curses -hda ../openwrt-x86-generic-combined-ext2.img -kernel ~/Documents/OpSys/Project2/linux-2.6.32.63/arch/x86_64/boot/bzImage -append "root=/dev/sda2 rootfstype=ext2"
+
+./bin/qemu-system-x86_64 -m 64M -L ./qemu/share/qemu/ -curses -hda ../openwrt-x86-generic-combined-ext2.img -hdb ~/Documents/OpSys/Project3/testsyscall2 -kernel ~/Documents/OpSys/Project3/linux-2.6.32.63/arch/x86_64/boot/bzImage -append "root=/dev/sda2 rootfstype=ext2"
+
+./bin/qemu-system-x86_64 -m 64M -L ./qemu/share/qemu/ -curses -hda ../openwrt-x86-generic-combined-ext2.img -hdb ~/Documents/OpSys/Project3/eventtest -hdc ~/Documents/OpSys/Project3/testevent -kernel ~/Documents/OpSys/Project3/linux-2.6.32.63/arch/x86_64/boot/bzImage -append "root=/dev/sda2 rootfstype=ext2"
+
+./bin/qemu-system-x86_64 -m 64M -L ./qemu/share/qemu/ -curses -hda ../openwrt-x86-generic-combined-ext2.img -hdb ~/Documents/OpSys/Project3/testevent -kernel ~/Documents/OpSys/Project3/linux-2.6.32.63/arch/x86_64/boot/bzImage -append "root=/dev/sda2 rootfstype=ext2"
+
+
+
+
+
+gcc -static -o testevent testevent.c
+
+
+dd if=/dev/sdb of=eventtest bs=811542 count=1
+
+dd if=/dev/sdb of=testevent bs=815978 count=1
+
+
+make mrproper
+cp csc256.config ./.config
+

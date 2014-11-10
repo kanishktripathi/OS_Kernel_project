@@ -1,0 +1,76 @@
+List of files added/modified. All file paths are relative to the linux kernel source directory.
+
+Modified files
+===============
+
+linux-2.6.32.63/arch/x86/kernel/syscall_table_32.S
+linux-2.6.32.63/arch/x86/include/asm/unistd_64.h
+linux-2.6.32.63/arch/x86/include/asm/unistd_32.h
+linux-2.6.32.63/include/asm-generic/unistd.h
+linux-2.6.32.63/include/linux/syscalls.h : The prototype for syscall added in this file
+
+Added files:
+============
+1. New directory mp2 created in the linux kernel source directory. The directory contains prinfo.c source file and a MakeFile.
+2. prinfo.h header file added in /include/linux/
+3. MakeFile in the source directory. Added mp2 directory mentioned in listing 1 among the source files to compile.
+
+All the programs are in the floppy directory.
+
+Experiments:
+===============
+Following test programs were created:
+
+1. test_prinfo.c : The test program. Prints all the entries of prinfo struct. Based on the Process ID passed to it.
+
+2. test_sleep.c : Prints its process id. Goes to sleep and then prints its state
+Result: The state of the process when its in sleep is: 1
+
+3. process_ownState.c : Prints its own process id and process state.
+Running this program every time returns its state as 0. Because its a currently running process, the current pointer points to it.
+If this process was not running, the state won't be 0.
+
+4. process_errors.c : Tests for error based inputs. NULL pointer, Bad address and Invalid process.
+Input			Output result
+-------------------------------------
+NULL pointer		 14
+Invalid address 0xa012	 22
+Process ID -1		 22
+
+5. experiment_sigblock.c : Gets and prints the process ID. Blocks the SUGUSR2 signal, 
+then sends itself the same signal twice.
+The signals were blocked hence the program continued to execute. Signals cannot be 
+queued because inside the task_struct, the sigpending struct stores the sigset_t signal
+field, signal contains a bit vector field "sig" of signals. So at a time, only one type 
+of signal can be stored.
+
+Field : Output result
+-------------------------------------
+Process id : 245
+Pending signals: 2048 Hex value:800
+Status number 0
+UID: 0
+Process name: experiment_sig
+Children total sys time: 0
+Children total user time: 0
+PID: 245
+Parent PID: 57
+Youngest child PID: 245
+Youngest among older sibling PID: 245
+Oldest younger sibling PID: 245
+Sys time: 30
+User time: 5
+Process state: 0
+Process start time...seconds: 98 nanoseconds: 790008871
+
+
+Work breakdown:
+===============
+1. Setup and installation: Michelle
+2. Experiment 3. sigblock() program: Michelle
+3. Kernel source file: Kanishk
+4. Experiment 1. sleep() process: Kanishk
+5. Experiment 2. Process state: Kanishk
+6. Error handling code and test programs: Michelle
+
+

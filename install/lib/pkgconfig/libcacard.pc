@@ -1,0 +1,13 @@
+prefix=/home/vax5/u46/criswell/classes/256/qemu/install
+exec_prefix=${prefix}
+libdir=/home/vax5/u46/criswell/classes/256/qemu/install/lib
+includedir=/home/vax5/u46/criswell/classes/256/qemu/install/include/cacard
+
+Name: cacard
+Description: CA Card library
+Version: 2.1.1
+
+Requires:  nss
+Libs: -L${libdir} -lcacard
+Libs.private:
+Cflags: -I${includedir}
